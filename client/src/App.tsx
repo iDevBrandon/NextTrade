@@ -16,14 +16,6 @@ type AuthProps = {
   Component: React.ComponentType<any>;
 };
 
-function Authenticated(props: AuthProps) {
-  const { Component } = props;
-  if (!Cookies.get("jwt")) {
-    return <Navigate replace to="/login" />;
-  }
-  return <Component {...props} />;
-}
-
 function NotAuthenticated(props: AuthProps) {
   const { Component } = props;
   if (Cookies.get("jwt")) {
@@ -40,7 +32,7 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={<Authenticated Component={PortfolioDashboard} />}
+              element={<NotAuthenticated Component={PortfolioDashboard} />}
             />
             <Route
               path="/login"
@@ -56,35 +48,35 @@ function App() {
             />
             <Route
               path="/portfolio"
-              element={<Authenticated Component={Portfolios} />}
+              element={<NotAuthenticated Component={Portfolios} />}
             />
             <Route
               path="/portfolio/create"
-              element={<Authenticated Component={NewPortfolio} />}
+              element={<NotAuthenticated Component={NewPortfolio} />}
             />
             <Route
               path="/portfolio/:portfolioId"
-              element={<Authenticated Component={PortfolioDashboard} />}
+              element={<NotAuthenticated Component={PortfolioDashboard} />}
             />
             <Route
               path="/portfolio/:portfolioId/strategies"
-              element={<Authenticated Component={PortfolioStrategy} />}
+              element={<NotAuthenticated Component={PortfolioStrategy} />}
             />
             <Route
               path="/profile"
-              element={<Authenticated Component={Profile} />}
+              element={<NotAuthenticated Component={Profile} />}
             />
             <Route
               path="/stock/:symbol"
-              element={<Authenticated Component={AssetDashboard} />}
+              element={<NotAuthenticated Component={AssetDashboard} />}
             />
             <Route
               path="/crypto/:symbol"
-              element={<Authenticated Component={AssetDashboard} />}
+              element={<NotAuthenticated Component={AssetDashboard} />}
             />
             <Route
               path="/option/:symbol"
-              element={<Authenticated Component={AssetDashboard} />}
+              element={<NotAuthenticated Component={AssetDashboard} />}
             />
           </Routes>
         </BrowserRouter>
